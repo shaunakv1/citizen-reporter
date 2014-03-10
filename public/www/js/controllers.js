@@ -3,9 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('ReportCtrl', [function() {
-  	console.log('This is from the reporting controller');
-  }])
-  .controller('MapCtrl', [function() {
+  controller('ReportCtrl', function($scope, Event) {
+  	$scope.eventTypes = Event.getEventTypes();
+  })
+  .controller('MapCtrl', function() {
   	console.log('This is from the mapping controller');
-  }]);
+  });
