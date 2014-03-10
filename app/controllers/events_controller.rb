@@ -42,6 +42,17 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/1
+  # GET /events/1.json
+  def delete
+    @event = Event.find(params[:id]);
+    @event.destroy
+    respond_to do |format|
+      format.html { redirect_to events_url }
+      format.json { head :no_content }
+    end
+  end
+
 
   # GET /events/new
   def new
