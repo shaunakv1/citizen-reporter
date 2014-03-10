@@ -119,6 +119,14 @@ angular.module('myApp.controllers', []).
     function addAssets(data) {
       $.each(data, function (idx, val) {
         //add each graphic
+        //Create info template
+        var infoTemplate = new esri.InfoTemplate({title : val.site_name, content : 
+            "<ul class='list-unstyled'>" +
+            "<li><b>Site name: </b>" + val.site_name + "</li>" +
+            "<li><b>Site type: </b>" + val.site_type + "</li>" + 
+            "<li><b>Phone: </b>" + val.phone + "</li>" + 
+            "<li><b>Address: </b>" + val.address + "</li>" + 
+            "<li><b>City: </b>" + val.city + "</li>" + "</ul>"});
         //Add new current event
         var point = new esri.geometry.Point();
         point.setX(val.longitude);
@@ -126,6 +134,7 @@ angular.module('myApp.controllers', []).
         var graphic = new esri.Graphic();
         graphic.setSymbol($scope.assetSymbol);
         graphic.setGeometry(point);
+        graphic.setInfoTemplate(infoTemplate);
         $scope.map.graphics.add(graphic);
       })
     }
