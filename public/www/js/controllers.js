@@ -12,7 +12,7 @@ angular.module('myApp.controllers', []).
       $scope.$apply();
     })
 
-  	$scope.order = "votes"
+  	$scope.order = "vote"
   	$scope.map, $scope.currentEvent, $scope.currentGraphic, $scope.markerSymbol;
   	$scope.filterText = "";
   	$scope.tweets = [];
