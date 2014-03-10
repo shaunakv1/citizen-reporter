@@ -1,7 +1,13 @@
 /* app css stylesheet */
 
 body {
-  background-color : #FFFCE8;
+  background-color : #e4e6e9;
+}
+
+h3{
+  font-size: 24px;
+  font-weight: 300;
+  color: #2679b5;
 }
 
 .menu {
@@ -43,14 +49,14 @@ body {
 
 #social {
   height : 350px;
-  background-color : #F5FFFA;
+  background-color : #fff;
   overflow : scroll;
 }
 
 #social li {
   margin-top : 4px;
   border-bottom : 1px solid black;
-  background-color : #3BFBFBF;
+  background-color : #BFBFBF;
 }
 
 .row {
@@ -82,3 +88,88 @@ body {
   text-align : center;
 }
 
+/**
+ * feed css
+ */
+
+.itemdiv {
+padding-right: 3px;
+min-height: 66px;
+position: relative;
+}
+
+*, *:before, *:after {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.itemdiv > .user {
+display: inline-block;
+width: 42px;
+position: absolute;
+left: 0px;
+}
+
+.itemdiv > .user > img {
+border-radius: 100%;
+border: 2px solid rgb(82, 147, 196);
+border-image-source: initial;
+border-image-slice: initial;
+border-image-width: initial;
+border-image-outset: initial;
+border-image-repeat: initial;
+max-width: 40px;
+position: relative;
+}
+
+.itemdiv > .body {
+width: auto;
+margin-left: 50px;
+margin-right: 12px;
+position: relative;
+border-bottom: 1px solid #aaa;
+}
+
+.itemdiv > .body > .name {
+display: block;
+color: #428bca;
+text-decoration: none;
+}
+
+.itemdiv > .body > .time {
+display: block;
+font-size: 11px;
+font-weight: bold;
+color: rgb(102, 102, 102);
+position: absolute;
+right: 9px;
+top: 0px;
+}
+
+.itemdiv > .body > .text {
+display: block;
+position: relative;
+margin-top: 2px;
+padding-bottom: 25px;
+padding-left: 7px;
+font-size: 13px;
+}
+
+.orange {
+color: #ff892a!important;
+font-weight: normal;
+}
+
+.red {
+  color: #dd5a43!important;
+}
+
+.green {
+  color: #69aa46!important;
+}
+.status{
+  position: absolute;
+  right: 9px;
+  top: 39px;
+}
