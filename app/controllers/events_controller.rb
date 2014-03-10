@@ -31,9 +31,16 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     
-    # old_reports = Event.near([@event.latitude,@event.longitude], 1);
-    # old_reports = old_reports.select {|r| r.event_type_id == 23 }
+    old_reports = Event.near([@event.latitude,@event.longitude], 1);
+    old_reports = old_reports.select {|r| r.event_type_id == @event.event_type_id }
 
+    if old_reports.count > 0 
+      @event = old_reports[0]
+      @event.vote = @event.vote + 1
+    else
+      @event.vote = 1
+    end 
+      
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
