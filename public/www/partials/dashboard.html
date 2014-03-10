@@ -30,7 +30,7 @@
 							<img class="media-object" ng-src="{{item.author.avatar.url}}" alt="Image">
 						</a>
 						<div class="media-body">
-							<h4 class="media-heading">{{item.createdOn}}</h4>
+							<h4 class="media-heading">{{formatDate(item.publishDate) | date:'yyyy-MM-dd HH:mm:ss'}}</h4>
 							<p>{{item.title}}</p>
 						</div>
 					</div>
@@ -46,6 +46,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th>Status</th>
 							<th>Type</th>
 							<th>Address</th>
 							<th>Date Created</th>
@@ -55,18 +56,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="event in allEvents | orderBy:order:true | filter:filterText">
+						<tr ng-repeat="event in allEvents | orderBy:order:true">
 							<!-- From Database -->
-							<th>{{event.event_type.name}}</th>
-							<th>{{event.address}}</th>
-							<th>{{event.created_at}}</th>
-							<th>{{event.updated_at}}</th>
-							<th>{{event.vote}}</th>
+							<td class="{{event.status.value}}-true">{{event.status.value}}</td>
+							<td>{{event.event_type.name}}</td>
+							<td>{{event.address}}</td>
+							<td>{{formatDate(event.created_at) | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{formatDate(event.updated_at) | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{event.vote}}</td>
 							<td>
 								<ul class="list-unstyled actions">
 									<li><a class="btn btn-primary" ng-click="viewEvent(event.latitude, event.longitude)">View</a></li>
-									<li><a class="btn btn-danger" href="#">Delete</a></li>
-									<li><a class="btn btn-success" href="#">Report</a></li>
+									<li><a class="btn btn-danger" ng-click="deleteEvent(event.id)">Delete</a></li>
+									<li><a class="btn btn-success" ng-click="createReport(event.id)">Verify</a></li>
 								</ul>
 							</td>
 						</tr>

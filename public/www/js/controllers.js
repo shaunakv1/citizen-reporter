@@ -5,12 +5,19 @@
 angular.module('myApp.controllers', []).
   controller('DashCtrl', function($scope, Events, Social) {
     $scope.allEvents = [];
-  	var eventPromise = Events.getEvents();
-    $.when.call($, eventPromise).then(function (r) {
-      console.log(r);
-      $scope.allEvents = r;
-      $scope.$apply();
-    })
+    function getEvents() {
+      var eventPromise = Events.getEvents();
+      $.when.call($, eventPromise).then(function (r) {
+        $scope.allEvents = r;
+        $scope.$apply();
+      })
+    }
+    //Continuous update of data
+    setInterval(function () {
+    	getEvents();
+    }, 3000);
+
+    getEvents();
 
   	$scope.order = "vote"
   	$scope.map, $scope.currentEvent, $scope.currentGraphic, $scope.markerSymbol;
@@ -49,20 +56,50 @@ angular.module('myApp.controllers', []).
   		$scope.map.graphics.add($scope.currentGraphic);
   		//Pan and zoom
   		$scope.map.centerAndZoom($scope.currentEvent, 14);
-  		var promise = Social.getTweets(lng, lat);
-      $.when.call($, promise).then(function (r) {
-        $scope.tweets = r.items;
-        $scope.$apply();
-      })
+      function updateTweets() {
+    		var promise = Social.getTweets(lng, lat);
+        $.when.call($, promise).then(function (r) {
+          $scope.tweets = r.items;
+          $scope.$apply();
+        })
+      }
+      updateTweets();
+
+      setInterval(function () {
+        updateTweets()
+      }, 10000)
   	}
+
+    $scope.formatDate = function (str) {
+       return Date.parse(str);
+    }
 
   	//Remove an event !DANGER!
   	$scope.deleteEvent = function (id) {
-
+      $.ajax({
+        url : 'http://gf.georati.com/events/' + id + "/delete.json",
+        method : 'GET',
+        success : function () {
+          getEvents();
+        }
+      })
   	}
-
+    
   	//Send report for incident
-  	$scope.createReport = function (obj) {
-
+  	$scope.createReport = function (id) {
+      $.ajax({
+        url : 'http://gf.georati.com/events/' + id + "/verify.json",
+        methond : 'GET',
+        success : function () {
+          getEvents();
+        }
+      })
   	}
+
+    //Get affected items
+    $scope.getAssets = function (id) {
+      $.ajax({
+        url : 'http://gf.georati.com/events/id/effects.json'
+      })
+    }
   });

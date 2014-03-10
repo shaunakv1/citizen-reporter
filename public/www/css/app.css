@@ -69,3 +69,8 @@ body {
   margin-top : 0;
 }
 
+.verified-true {
+  font-weight : bold;
+  color : green;
+}
+

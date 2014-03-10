@@ -20,7 +20,7 @@ angular.module('myApp.services', [])
   	return {
   		getTweets : function (lng, lat) {
   			return $.ajax({
-  				url : "https://api.geofeedia.com/v1/search/latlon/" + lat+ "," + lng + ",1",
+  				url : "https://api.geofeedia.com/v1/search/latlon/" + lat+ "," + lng + ",0.5",
   				data : {
   					appId : "0e5cfb9b",
   					appKey : "cb14f6e603af80cbb9bc488de499e685",
