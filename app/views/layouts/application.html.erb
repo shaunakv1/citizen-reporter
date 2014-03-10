@@ -7,8 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<nav class="navbar navbar-inverse">
+    <a class="navbar-brand" href="#" id="title"><span class="glyphicon glyphicon-fire glyphicon-inverse"></span>  Citizen-Reporter</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="http://citirep.georati.com/#/home">HOME</a>
+      </li>
+      <li>
+        <a href="http://citirep.georati.com/#/dashboard">OPERATIONAL DASHBOARD</a>
+      </li>
+      <li>
+        <a href="http://report.georati.com" target="_blank">INCIDENT REPORTING</a>
+      </li>
+    </ul>
+  </nav>
+  
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
 </body>
 </html>
