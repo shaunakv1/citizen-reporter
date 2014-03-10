@@ -1,7 +1,15 @@
 CitizenReporter::Application.routes.draw do
-  resources :events
+  
+  #resources :events
+  resources :events do
+    member do
+      get :verify
+      get :unverify
+    end
+  end
 
   resources :locations
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

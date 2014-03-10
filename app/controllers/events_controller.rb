@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = Event.all
     respond_to do |format|
         format.html
-        format.json { render :json => @events.to_json(:include => :event_type), :callback => params['callback'] }
+        format.json { render :json => @events.to_json(:include => [:event_type, :status]), :callback => params['callback'] }
     end
   end
 
@@ -15,6 +15,33 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
   end
+
+  # GET /events/1  
+  # GET /events/1
+  def verify
+    @event = Event.find(params[:id]);
+    @event.status_id = 2
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to events_url }
+        format.json { head :no_content }
+      end  
+    end
+  end
+
+  # GET /events/1
+  # GET /events/1.json
+  def unverify
+    @event = Event.find(params[:id]);
+    @event.status_id = 1
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to events_url }
+        format.json { head :no_content }
+      end  
+    end
+  end
+
 
   # GET /events/new
   def new
@@ -39,6 +66,7 @@ class EventsController < ApplicationController
       @event.vote = @event.vote + 1
     else
       @event.vote = 1
+      @event.status_id = 1
     end 
       
     respond_to do |format|
