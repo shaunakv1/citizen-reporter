@@ -36,6 +36,31 @@ class EventsController < ApplicationController
       if @event.save
         format.html { redirect_to events_url }
         format.json { head :no_content }
+         
+            # put your own credentials here 
+            account_sid = 'ACf9619fe1f1b27b6dbaf51d3c06ab22c9' 
+            auth_token = 'c50446674945a4c557d7b9584a5ce177' 
+             
+            # set up a client to talk to the Twilio REST API 
+            @client = Twilio::REST::Client.new account_sid, auth_token 
+             
+            @client.account.messages.create({
+              :from => '+18329243700', 
+              :to => @event.event_type.phone, 
+              :body => "There was a #{@event.event_type.name} event at #{@event.address} at #{@event.created_at.to_formatted_s(:long)}",  
+            })
+
+            # twilio_sid = "PN75d3b9e7bd94111547f611bf14b600b6"
+            # twilio_token = "c50446674945a4c557d7b9584a5ce177"
+            # twilio_phone_number = "8329243700"
+         
+            # @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
+         
+            # @twilio_client.account.sms.messages.create(
+            #   :from => "+1#{8329243700}",
+            #   :to => @event.event_type.phone,
+            #   :body => "There was a #{@event.event_type.name} event at #{@event.address} at #{@event.created_at.to_formatted_s(:long)}"
+            # )
       end  
     end
   end
