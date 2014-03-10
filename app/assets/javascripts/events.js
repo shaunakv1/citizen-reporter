@@ -37,12 +37,12 @@ $(function () {
 
 	});
 
-	$('#new_checkin').on('ajax:success',function (event, checkin, status) {
-	    $('#geoLocationYes').text('You were checked in at : '+checkin.address);
+	$('#new_event').on('ajax:success',function (event, checkin, status) {
+	    $('#geoLocationYes').text('Your event was recorded form : '+checkin.address);
 	    $('#geoLocationYes').removeClass('hide');
 	});    
 
-	$('#new_checkin').on('ajax:error',function (event, error, status) {
+	$('#new_event').on('ajax:error',function (event, error, status) {
 	    $('#geoLocationNo').text('Something went wrong :( Could not check you in');
 	    $('#geoLocationNo').removeClass('hide');
 	});
