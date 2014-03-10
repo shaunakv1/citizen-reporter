@@ -18,6 +18,17 @@ class EventsController < ApplicationController
 
   # GET /events/1  
   # GET /events/1
+  def effects
+    event = Event.find(params[:id]);
+    @locations = event.locations
+    respond_to do |format|
+        format.html { redirect_to events_url }
+        format.json { render :json => @locations.to_json, :callback => params['callback'] }
+    end
+  end
+  
+  # GET /events/1  
+  # GET /events/1
   def verify
     @event = Event.find(params[:id]);
     @event.status_id = 2
@@ -53,7 +64,6 @@ class EventsController < ApplicationController
     end
   end
 
-
   # GET /events/new
   def new
     @event = Event.new
@@ -78,6 +88,7 @@ class EventsController < ApplicationController
     else
       @event.vote = 1
       @event.status_id = 1
+      @event.locations << Location.near([@event.latitude,@event.longitude], 1)
     end 
       
     respond_to do |format|

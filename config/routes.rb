@@ -6,6 +6,7 @@ CitizenReporter::Application.routes.draw do
       get :verify
       get :unverify
       get :delete
+      get :effects
     end
   end
 
