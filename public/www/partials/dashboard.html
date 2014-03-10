@@ -24,18 +24,31 @@
 	<div class="col-md-5">
 		<div id="social">
 			<ul class="list-unstyled">
-				<p ng-hide="tweets.length>0"><h4 id="helpertext">'View' an event to view nearby social media</h4></p>
+				<!-- <p ng-hide="tweets.length>0"><h4 id="helpertext">'View' an event to view nearby social media</h4></p> -->
 				<i class="fa fa-rss orange"></i> Social Feed
 				<li ng-repeat="item in tweets | filter:filterText">
-					<div class="media">
-						<a class="pull-left" href="#">
-							<img class="media-object" ng-src="{{item.author.avatar.url}}" alt="Image">
-						</a>
-						<div class="media-body">
-							<h4 class="media-heading">{{formatDate(item.publishDate) | date:'yyyy-MM-dd HH:mm:ss'}}</h4>
-							<p>{{item.title}}</p>
-						</div>
-					</div>
+					<div class="row">
+					      <div class="col-xs-12">
+					        <div class="itemdiv commentdiv">
+					          <div class="user">
+					            <img class="media-object" ng-src="{{item.author.avatar.url}}" alt="Image">    
+					          </div>
+
+					          <div class="body">
+					            
+					            <div class="time">
+					              <i class="fa fa-clock-o fa-lg"></i>
+					              <span class="orange"> {{formatDate(item.publishDate) | date:'yyyy-MM-dd HH:mm:ss'}} </span>
+					            </div>
+
+					            <div class="text">
+					              <i class="fa fa-quote-left"></i>
+					              {{item.title}}
+					            </div>
+					          </div>
+					        </div>
+					      </div>
+					  </div>
 				</li>
 			</ul>
 		</div>

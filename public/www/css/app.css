@@ -1,7 +1,8 @@
 /* app css stylesheet */
 
 body {
-  background-color : #e4e6e9;
+  background-color : #FFFCE8;
+  /* e4e6e9  */
 }
 
 h3{
@@ -49,14 +50,15 @@ h3{
 
 #social {
   height : 350px;
-  background-color : #fff;
-  overflow : scroll;
+  background-color : #e4e6e9;
+  overflow-y : scroll;
+  overflow-x: hidden;  
 }
 
 #social li {
-  margin-top : 4px;
+  /*margin-top : 4px;
   border-bottom : 1px solid black;
-  background-color : #BFBFBF;
+  background-color : #BFBFBF;*/
 }
 
 .row {
@@ -121,6 +123,8 @@ border-image-outset: initial;
 border-image-repeat: initial;
 max-width: 40px;
 position: relative;
+left: 8px;
+top: -3px;
 }
 
 .itemdiv > .body {
@@ -144,13 +148,13 @@ font-weight: bold;
 color: rgb(102, 102, 102);
 position: absolute;
 right: 9px;
-top: 0px;
+top: 20px;
 }
 
 .itemdiv > .body > .text {
 display: block;
 position: relative;
-margin-top: 2px;
+margin-top: 7px;
 padding-bottom: 25px;
 padding-left: 7px;
 font-size: 13px;
