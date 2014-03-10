@@ -11,5 +11,6 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: 'DashCtrl'});
-  $routeProvider.otherwise({redirectTo: '/dashboard'});
+  $routeProvider.when('/home', {templateUrl: 'partials/home.html'});
+  $routeProvider.otherwise({redirectTo: '/home'});
 }]);

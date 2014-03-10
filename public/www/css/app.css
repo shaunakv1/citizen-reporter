@@ -65,6 +65,10 @@ body {
   color : #E82C0C;
 }
 
+.title {
+  color : #E82C0C;
+}
+
 #main-header {
   margin-top : 0;
 }
@@ -72,5 +76,9 @@ body {
 .verified-true {
   font-weight : bold;
   color : green;
+}
+
+#helpertext{
+  text-align : center;
 }
 

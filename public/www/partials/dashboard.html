@@ -24,6 +24,7 @@
 	<div class="col-md-5">
 		<div id="social">
 			<ul class="list-unstyled">
+				<p ng-hide="tweets.length>0"><h4 id="helpertext">'View' an event to view nearby social media</h4></p>
 				<li ng-repeat="item in tweets | filter:filterText">
 					<div class="media">
 						<a class="pull-left" href="#">
