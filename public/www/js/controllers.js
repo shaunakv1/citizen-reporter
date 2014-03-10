@@ -48,7 +48,7 @@ angular.module('myApp.controllers', []).
   	});
 
   	// Add point to map and pan
-  	$scope.viewEvent = function (lat, lng) {
+  	$scope.viewEvent = function (lat, lng, id) {
   		//Add new current event
   		$scope.currentEvent.setX(lng);
   		$scope.currentEvent.setY(lat);
@@ -68,6 +68,9 @@ angular.module('myApp.controllers', []).
       setInterval(function () {
         updateTweets()
       }, 10000)
+
+      //Add assets
+      $scope.getAssets(id);
   	}
 
     $scope.formatDate = function (str) {
@@ -99,7 +102,18 @@ angular.module('myApp.controllers', []).
     //Get affected items
     $scope.getAssets = function (id) {
       $.ajax({
-        url : 'http://gf.georati.com/events/id/effects.json'
+        url : 'http://gf.georati.com/events/' + id + '/effects.json',
+        method : 'GET',
+        dataType : 'JSONP',
+        success : function (r) {
+          //Add assets to map
+          adAssets(r);
+        }
       })
+    }
+
+    //Add assets to the map
+    function addAssets = function (data) {
+      
     }
   });
