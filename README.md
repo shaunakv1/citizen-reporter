@@ -10,6 +10,7 @@
 
 * County of Riverside assets are identified with each incident ([Riverside Public Sites Service](http://www.rctlma.org/siteadmin/rest/services/Public/Public_Sites/FeatureServer)).
 * Build using **ESRI’s JavaScript API**
+* Social feed using **Geofeedia**
 * SMS messaging using **Twilio**
 * Email messaging using **SendGrid** ..almost :(
 
