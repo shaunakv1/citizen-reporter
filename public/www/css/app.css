@@ -28,3 +28,17 @@
   content: "";
   padding: 0;
 }
+
+.navbar {
+  border-radius : 0;
+}
+
+#map {
+  height : 350px;
+  background-color : #2D3C59;
+}
+
+#social {
+  height : 350px;
+  background-color : #C08065;
+}

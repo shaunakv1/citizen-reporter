@@ -10,7 +10,6 @@ angular.module('myApp', [
   'myApp.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/report', {templateUrl: 'partials/report.html', controller: 'ReportCtrl'});
-  $routeProvider.when('/map', {templateUrl: 'partials/map.html', controller: 'MapCtrl'});
-  $routeProvider.otherwise({redirectTo: '/MapCtrl'});
+  $routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: 'DashCtrl'});
+  $routeProvider.otherwise({redirectTo: '/dashboard'});
 }]);
