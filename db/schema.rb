@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140310024715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
 
   create_table "event_types", force: true do |t|
     t.string   "name"
@@ -51,29 +50,6 @@ ActiveRecord::Schema.define(version: 20140310024715) do
     t.integer  "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "publicsiteswgs84", primary_key: "gid", force: true do |t|
-    t.integer "objectid"
-    t.string  "site_type", limit: 50
-    t.string  "site_name", limit: 50
-    t.string  "address",   limit: 40
-    t.string  "city",      limit: 25
-    t.integer "zipcode"
-    t.string  "phone",     limit: 20
-    t.integer "geom",      limit: 0
-    t.decimal "latitude",             precision: 15, scale: 10
-    t.decimal "longitude",            precision: 15, scale: 10
-  end
-
-  add_index "publicsiteswgs84", ["geom"], name: "publicsiteswgs84_geom_gist", using: :gist
-
-  create_table "spatial_ref_sys", id: false, force: true do |t|
-    t.integer "srid",                   null: false
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
   end
 
   create_table "statuses", force: true do |t|

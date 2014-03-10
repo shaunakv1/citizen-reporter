@@ -1,45 +1,29 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4">
+    <h1>Report an Event!</h1>
+  </div>
+  <div class="col-xs-6 col-xs-offset-3">
+    <div id="geoLocationYes" class="alert alert-success hide">Awesome! Geolocation is supported :) Remember to give your browser permission</div>
+    <div id="geoLocationNo" class="alert alert-danger hide">Oh Snap! Geolocation is not supported :(</div>
+  </div>  
+</div>
 
-      <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <%= bootstrap_form_for(@event, remote: true, format: :json) do |f| %>
+            <div>
+              <% for event_type in @event_types %>
+                <div class="event-type alert alert-warning" data-id="<%= event_type.id %>"><%= event_type.name %></div>        
+              <% end %>
+            </div>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
+          <%= f.hidden_field :accuracy %>
+          <%= f.hidden_field :event_type_id %>
+
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :event_type_id %><br>
-    <%= f.text_field :event_type_id %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :accuracy %><br>
-    <%= f.number_field :accuracy %>
-  </div>
-  <div class="field">
-    <%= f.label :vote %><br>
-    <%= f.number_field :vote %>
-  </div>
-  <div class="field">
-    <%= f.label :status_id %><br>
-    <%= f.text_field :status_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+      <%= button_tag '<span class="ladda-label">Report</span>'.html_safe, id:"report", class: "btn btn-primary btn-lg ladda-button", :data => {style: "expand-left", size: "l"}  %>      
+      </div>  
+</div>
