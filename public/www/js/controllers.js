@@ -21,6 +21,7 @@ angular.module('myApp.controllers', []).
 
   	$scope.order = "vote"
   	$scope.map, $scope.currentEvent, $scope.currentGraphic, $scope.markerSymbol;
+    $scope.assetSymbol;
   	$scope.filterText = "";
   	$scope.tweets = [];
   	//Initialize Map
@@ -38,8 +39,9 @@ angular.module('myApp.controllers', []).
 	    });
 	    //Create Picture
 	    $scope.markerSymbol= new PictureMarkerSymbol({"angle":0,"xoffset":0,"yoffset":0,"type":"esriPMS","url":"http://static.arcgis.com/images/Symbols/Basic/esriCrimeMarker_86.png","contentType":"image/png","width":24,"height":24});
-
-        //Create point
+      $scope.assetSymbol = new PictureMarkerSymbol({"angle":0,"xoffset":0,"yoffset":0,"type":"esriPMS","url":"http://static.arcgis.com/images/Symbols/Shapes/BlueDiamondLargeB.png","contentType":"image/png","width":24,"height":24});
+      
+      //Create point
 	    $scope.currentEvent = new Point();
 
 	    //Create Graphic
@@ -49,6 +51,7 @@ angular.module('myApp.controllers', []).
 
   	// Add point to map and pan
   	$scope.viewEvent = function (lat, lng, id) {
+      $scope.map.graphics.clear();
   		//Add new current event
   		$scope.currentEvent.setX(lng);
   		$scope.currentEvent.setY(lat);
@@ -67,7 +70,7 @@ angular.module('myApp.controllers', []).
 
       setInterval(function () {
         updateTweets()
-      }, 10000)
+      }, 15000)
 
       //Add assets
       $scope.getAssets(id);
@@ -114,6 +117,16 @@ angular.module('myApp.controllers', []).
 
     //Add assets to the map
     function addAssets(data) {
-
+      $.each(data, function (idx, val) {
+        //add each graphic
+        //Add new current event
+        var point = new esri.geometry.Point();
+        point.setX(val.longitude);
+        point.setY(val.latitude);
+        var graphic = new esri.Graphic();
+        graphic.setSymbol($scope.assetSymbol);
+        graphic.setGeometry(point);
+        $scope.map.graphics.add(graphic);
+      })
     }
   });
