@@ -3,9 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
-
+  controller('ReportCtrl', [function() {
+  	console.log('This is from the reporting controller');
   }])
-  .controller('MyCtrl2', [function() {
-
+  .controller('MapCtrl', [function() {
+  	console.log('This is from the mapping controller');
   }]);
