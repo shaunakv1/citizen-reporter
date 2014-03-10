@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = Event.all
     respond_to do |format|
         format.html
-        format.json { render json: @events, :callback => params['callback'] }
+        format.json { render :json => @events.to_json(:include => :event_type), :callback => params['callback'] }
     end
   end
 
@@ -30,6 +30,9 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    
+    # old_reports = Event.near([@event.latitude,@event.longitude], 1);
+    # old_reports = old_reports.select {|r| r.event_type_id == 23 }
 
     respond_to do |format|
       if @event.save

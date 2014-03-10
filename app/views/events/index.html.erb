@@ -19,7 +19,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.event_type %></td>
+        <td><%= event.event_type.name %></td>
         <td><%= event.latitude %></td>
         <td><%= event.longitude %></td>
         <td><%= event.address %></td>
