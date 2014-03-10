@@ -107,13 +107,13 @@ angular.module('myApp.controllers', []).
         dataType : 'JSONP',
         success : function (r) {
           //Add assets to map
-          adAssets(r);
+          addAssets(r);
         }
       })
     }
 
     //Add assets to the map
-    function addAssets = function (data) {
-      
+    function addAssets(data) {
+
     }
   });
