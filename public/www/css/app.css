@@ -40,5 +40,17 @@
 
 #social {
   height : 350px;
-  background-color : #C08065;
+  background-color : #C5FFE2;
+  overflow : scroll;
 }
+
+#social li {
+  margin-top : 4px;
+  border-bottom : 1px solid black;
+  background-color : #3BFBFBF;
+}
+
+.row {
+  margin-top : 5px;
+}
+

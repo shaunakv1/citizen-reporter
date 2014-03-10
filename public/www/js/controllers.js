@@ -3,27 +3,27 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('DashCtrl', function($scope, Events) {
+  controller('DashCtrl', function($scope, Events, Social) {
   	$scope.allEvents = Events.getEvents();
   	$scope.order = "votes"
   	$scope.map, $scope.currentEvent, $scope.currentGraphic, $scope.markerSymbol;
+  	$scope.filterText = "";
+  	$scope.tweets = [];
   	//Initialize Map
   	require(["esri/map", 
   			 "esri/geometry/Point", 
   			 "esri/graphic", 
-  			 "esri/symbols/SimpleMarkerSymbol",
+  			 "esri/symbols/PictureMarkerSymbol",
   			 "dojo/_base/Color",
   			 "dojo/domReady!"], 
-  	function(Map, Point, Graphic, SimpleMarkerSymbol, Color) {
+  	function(Map, Point, Graphic, PictureMarkerSymbol, Color) {
   		$scope.map = new Map("map", {
 	      center: [-116.532705, 33.917568],
 	      zoom: 12,
 	      basemap: "hybrid"
 	    });
-	    //Create Marker Symbol
-	    $scope.markerSymbol = new SimpleMarkerSymbol();
-        $scope.markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
-        $scope.markerSymbol.setColor(new Color("#00FFFF"));
+	    //Create Picture
+	    $scope.markerSymbol= new PictureMarkerSymbol({"angle":0,"xoffset":0,"yoffset":0,"type":"esriPMS","url":"http://static.arcgis.com/images/Symbols/Basic/esriCrimeMarker_86.png","contentType":"image/png","width":24,"height":24});
 
         //Create point
 	    $scope.currentEvent = new Point();
@@ -41,6 +41,22 @@ angular.module('myApp.controllers', []).
   		$scope.currentGraphic.setGeometry($scope.currentEvent);
   		$scope.map.graphics.add($scope.currentGraphic);
   		//Pan and zoom
-  		$scope.map.centerAndZoom($scope.currentEvent, 13)
+  		$scope.map.centerAndZoom($scope.currentEvent, 14);
+  		var promise = Social.getTweets(lng, lat);
+      $.when.call($, promise).then(function (r) {
+        console.log(r);
+        $scope.tweets = r.items;
+        $scope.$apply();
+      })
+  	}
+
+  	//Remove an event !DANGER!
+  	$scope.deleteEvent = function (id) {
+
+  	}
+
+  	//Send report for incident
+  	$scope.createReport = function (obj) {
+
   	}
   });
