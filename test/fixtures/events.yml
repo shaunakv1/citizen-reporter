@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_type_id: 
+  latitude: 1.5
+  longitude: 1.5
+  address: MyString
+  accuracy: 1
+  vote: 1
+  status_id: 
+
+two:
+  event_type_id: 
+  latitude: 1.5
+  longitude: 1.5
+  address: MyString
+  accuracy: 1
+  vote: 1
+  status_id: 
