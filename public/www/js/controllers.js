@@ -24,6 +24,7 @@ angular.module('myApp.controllers', []).
     $scope.assetSymbol;
   	$scope.filterText = "";
   	$scope.tweets = [];
+    $scope.updatingTweets = false;
   	//Initialize Map
   	require(["esri/map", 
   			 "esri/geometry/Point", 
@@ -51,6 +52,7 @@ angular.module('myApp.controllers', []).
 
   	// Add point to map and pan
   	$scope.viewEvent = function (lat, lng, id) {
+      $scope.updatingTweets = true;
       $scope.map.graphics.clear();
   		//Add new current event
   		$scope.currentEvent.setX(lng);
@@ -58,19 +60,24 @@ angular.module('myApp.controllers', []).
   		$scope.currentGraphic.setGeometry($scope.currentEvent);
   		$scope.map.graphics.add($scope.currentGraphic);
   		//Pan and zoom
+      var promise;
   		$scope.map.centerAndZoom($scope.currentEvent, 14);
       function updateTweets() {
-    		var promise = Social.getTweets(lng, lat);
+    		promise = Social.getTweets(lng, lat);
         $.when.call($, promise).then(function (r) {
           $scope.tweets = r.items;
+          $scope.updatingTweets = false;
           $scope.$apply();
         })
       }
       updateTweets();
-
+      //Remove for now
+      /*
       setInterval(function () {
-        updateTweets()
-      }, 15000)
+        if(!$scope.updatingTweets) {
+          updateTweets()
+        }
+      }, 3000)*/ // every 15 seconds
 
       //Add assets
       $scope.getAssets(id);
